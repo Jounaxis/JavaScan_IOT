@@ -10,12 +10,8 @@ import java.time.LocalDateTime;
 @Table(name = "TB_RELATORIO")
 @NoArgsConstructor
 @AllArgsConstructor
-public class RelatorioViabilidade {
+public class RelatorioViabilidade extends EntidadeBase {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_RELATORIO")
-    private Long id;
 
     private String fatorAvaliado;
     private Double valorEncontrado;
@@ -28,14 +24,6 @@ public class RelatorioViabilidade {
     @OneToOne
     @JoinColumn(name = "ID_SIMULACAO")
     private SimulacaoCultivo simulacao;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getFatorAvaliado() {
         return fatorAvaliado;

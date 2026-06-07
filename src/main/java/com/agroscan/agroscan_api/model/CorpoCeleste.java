@@ -8,12 +8,7 @@ import lombok.*;
 @Table(name = "TB_CORPO_CELESTE")
 @NoArgsConstructor
 @AllArgsConstructor
-public class CorpoCeleste {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_CORPO")
-    private Long id;
+public class CorpoCeleste extends EntidadeBase {
 
     private String nome;
     private String tipo;
@@ -22,13 +17,6 @@ public class CorpoCeleste {
     private String composicaoAtmosfera;
     private String descricao;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getNome() {
         return nome;

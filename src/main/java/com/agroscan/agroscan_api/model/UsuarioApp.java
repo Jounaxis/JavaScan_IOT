@@ -9,12 +9,7 @@ import java.util.List;
 @Table(name = "TB_USUARIO_APP")
 @NoArgsConstructor
 @AllArgsConstructor
-public class UsuarioApp {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_USER")
-    private Long id;
+public class UsuarioApp extends EntidadeBase {
 
     @Column(name = "NOME", nullable = false, length = 100)
     private String nome;
@@ -31,13 +26,6 @@ public class UsuarioApp {
     @OneToMany(mappedBy = "usuario")
     private List<SimulacaoCultivo> simulacoes;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getNome() {
         return nome;

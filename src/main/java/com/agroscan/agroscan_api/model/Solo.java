@@ -8,12 +8,7 @@ import lombok.*;
 @Table(name = "TB_SOLO")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Solo {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_SOLO")
-    private Long id;
+public class Solo extends EntidadeBase{
 
     private String tipoSolo;
     private Double phEstimado;
@@ -22,13 +17,6 @@ public class Solo {
     private String composicaoPrincipal;
     private String observacoes;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getTipoSolo() {
         return tipoSolo;

@@ -9,12 +9,7 @@ import java.util.List;
 @Table(name = "TB_VEGETAL")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Vegetal {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_VEGETAL")
-    private Long id;
+public class Vegetal extends EntidadeBase {
 
     @Column(name = "NOME_COMUM", nullable = false, length = 100)
     private String nomeComum;
@@ -37,13 +32,7 @@ public class Vegetal {
     @OneToMany(mappedBy = "vegetal")
     private List<SimulacaoCultivo> simulacoes;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getNomeComum() {
         return nomeComum;

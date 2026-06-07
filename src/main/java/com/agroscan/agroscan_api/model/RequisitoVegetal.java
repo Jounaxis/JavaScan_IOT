@@ -7,12 +7,7 @@ import lombok.*;
 @Table(name = "TB_REQUISITO_VEGETAL")
 @NoArgsConstructor
 @AllArgsConstructor
-public class RequisitoVegetal {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_REQUISITO")
-    private Long id;
+public class RequisitoVegetal extends EntidadeBase {
 
     @Column(name = "TEMP_MIN")
     private Double tempMin;
@@ -38,14 +33,6 @@ public class RequisitoVegetal {
     @ManyToOne
     @JoinColumn(name = "ID_VEGETAL")
     private Vegetal vegetal;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Double getTempMin() {
         return tempMin;

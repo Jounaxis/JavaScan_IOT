@@ -1,7 +1,10 @@
 package com.agroscan.agroscan_api.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
@@ -23,6 +26,9 @@ public class SimulacaoCultivo {
     private String status;
     private Double scoreViabilidade;
     private String resultado;
+
+    @Embedded
+    private Localizacao localizacao;
 
     @ManyToOne
     @JoinColumn(name = "ID_USER")
@@ -82,6 +88,14 @@ public class SimulacaoCultivo {
 
     public void setResultado(String resultado) {
         this.resultado = resultado;
+    }
+
+    public Localizacao getLocalizacao() {
+        return localizacao;
+    }
+
+    public void setLocalizacao(Localizacao localizacao) {
+        this.localizacao = localizacao;
     }
 
     public UsuarioApp getUsuario() {
