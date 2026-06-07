@@ -6,6 +6,9 @@ import com.agroscan.agroscan_api.model.RelatorioViabilidade;
 import com.agroscan.agroscan_api.service.RelatorioViabilidadeService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.hateoas.EntityModel;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 import java.util.List;
 
@@ -30,8 +33,14 @@ public class RelatorioViabilidadeController {
     }
 
     @GetMapping("/{id}")
-    public RelatorioViabilidade findById(@PathVariable Long id) {
-        return service.findById(id);
+    public EntityModel<RelatorioViabilidade> findById(@PathVariable Long id) {
+        RelatorioViabilidade relatorio = service.findById(id);
+
+        return EntityModel.of(
+                relatorio,
+                linkTo(methodOn(RelatorioViabilidadeController.class).findById(id)).withSelfRel(),
+                linkTo(methodOn(RelatorioViabilidadeController.class).findAll()).withRel("todos-os-relatorios")
+        );
     }
 
     @PutMapping("/{id}")

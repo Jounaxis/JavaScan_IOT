@@ -1,15 +1,17 @@
 package com.agroscan.agroscan_api.controller;
 
-
 import com.agroscan.agroscan_api.dto.request.UsuarioAppRequest;
+import com.agroscan.agroscan_api.dto.response.UsuarioAppResponse;
 import com.agroscan.agroscan_api.mapper.UsuarioAppMapper;
 import com.agroscan.agroscan_api.model.UsuarioApp;
 import com.agroscan.agroscan_api.service.UsuarioAppService;
 import jakarta.validation.Valid;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.*;
-import com.agroscan.agroscan_api.dto.response.UsuarioAppResponse;
 
 import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -32,11 +34,15 @@ public class UsuarioAppController {
     }
 
     @GetMapping("/{id}")
-    public UsuarioAppResponse findById(@PathVariable Long id) {
-
+    public EntityModel<UsuarioAppResponse> findById(@PathVariable Long id) {
         UsuarioApp usuario = service.findById(id);
+        UsuarioAppResponse response = UsuarioAppMapper.toResponse(usuario);
 
-        return UsuarioAppMapper.toResponse(usuario);
+        return EntityModel.of(
+                response,
+                linkTo(methodOn(UsuarioAppController.class).findById(id)).withSelfRel(),
+                linkTo(methodOn(UsuarioAppController.class).findAll()).withRel("todos-os-usuarios")
+        );
     }
 
     @PutMapping("/{id}")

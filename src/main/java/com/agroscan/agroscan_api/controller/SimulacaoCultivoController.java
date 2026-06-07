@@ -6,6 +6,9 @@ import com.agroscan.agroscan_api.model.SimulacaoCultivo;
 import com.agroscan.agroscan_api.service.SimulacaoCultivoService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.hateoas.EntityModel;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 import java.util.List;
 
@@ -30,8 +33,14 @@ public class SimulacaoCultivoController {
     }
 
     @GetMapping("/{id}")
-    public SimulacaoCultivoResponse findById(@PathVariable Long id) {
-        return service.findById(id);
+    public EntityModel<SimulacaoCultivoResponse> findById(@PathVariable Long id) {
+        SimulacaoCultivoResponse response = service.findById(id);
+
+        return EntityModel.of(
+                response,
+                linkTo(methodOn(SimulacaoCultivoController.class).findById(id)).withSelfRel(),
+                linkTo(methodOn(SimulacaoCultivoController.class).findAll()).withRel("todas-as-simulacoes")
+        );
     }
 
     @PutMapping("/{id}")

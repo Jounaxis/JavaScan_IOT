@@ -5,6 +5,9 @@ import com.agroscan.agroscan_api.model.ClimaAmbiente;
 import com.agroscan.agroscan_api.service.ClimaAmbienteService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.hateoas.EntityModel;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 import java.util.List;
 
@@ -29,8 +32,14 @@ public class ClimaAmbienteController {
     }
 
     @GetMapping("/{id}")
-    public ClimaAmbiente findById(@PathVariable Long id) {
-        return service.findById(id);
+    public EntityModel<ClimaAmbiente> findById(@PathVariable Long id) {
+        ClimaAmbiente clima = service.findById(id);
+
+        return EntityModel.of(
+                clima,
+                linkTo(methodOn(ClimaAmbienteController.class).findById(id)).withSelfRel(),
+                linkTo(methodOn(ClimaAmbienteController.class).findAll()).withRel("todos-os-climas")
+        );
     }
 
     @PutMapping("/{id}")

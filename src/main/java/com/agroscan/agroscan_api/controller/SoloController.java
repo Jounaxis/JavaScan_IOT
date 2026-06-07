@@ -5,6 +5,9 @@ import com.agroscan.agroscan_api.model.Solo;
 import com.agroscan.agroscan_api.service.SoloService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.hateoas.EntityModel;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 import java.util.List;
 
@@ -29,8 +32,14 @@ public class SoloController {
     }
 
     @GetMapping("/{id}")
-    public Solo findById(@PathVariable Long id) {
-        return service.findById(id);
+    public EntityModel<Solo> findById(@PathVariable Long id) {
+        Solo solo = service.findById(id);
+
+        return EntityModel.of(
+                solo,
+                linkTo(methodOn(SoloController.class).findById(id)).withSelfRel(),
+                linkTo(methodOn(SoloController.class).findAll()).withRel("todos-os-solos")
+        );
     }
 
     @PutMapping("/{id}")

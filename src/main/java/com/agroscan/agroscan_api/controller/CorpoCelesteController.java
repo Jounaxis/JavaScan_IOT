@@ -6,6 +6,9 @@ import com.agroscan.agroscan_api.model.CorpoCeleste;
 import com.agroscan.agroscan_api.service.CorpoCelesteService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.hateoas.EntityModel;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 import java.util.List;
 
@@ -30,8 +33,14 @@ public class CorpoCelesteController {
     }
 
     @GetMapping("/{id}")
-    public CorpoCeleste findById(@PathVariable Long id) {
-        return service.findById(id);
+    public EntityModel<CorpoCeleste> findById(@PathVariable Long id) {
+        CorpoCeleste corpo = service.findById(id);
+
+        return EntityModel.of(
+                corpo,
+                linkTo(methodOn(CorpoCelesteController.class).findById(id)).withSelfRel(),
+                linkTo(methodOn(CorpoCelesteController.class).findAll()).withRel("todos-os-corpos-celestes")
+        );
     }
 
     @PutMapping("/{id}")

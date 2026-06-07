@@ -5,6 +5,9 @@ import com.agroscan.agroscan_api.model.RequisitoVegetal;
 import com.agroscan.agroscan_api.service.RequisitoVegetalService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.hateoas.EntityModel;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 import java.util.List;
 
@@ -29,8 +32,14 @@ public class RequisitoVegetalController {
     }
 
     @GetMapping("/{id}")
-    public RequisitoVegetal findById(@PathVariable Long id) {
-        return service.findById(id);
+    public EntityModel<RequisitoVegetal> findById(@PathVariable Long id) {
+        RequisitoVegetal requisito = service.findById(id);
+
+        return EntityModel.of(
+                requisito,
+                linkTo(methodOn(RequisitoVegetalController.class).findById(id)).withSelfRel(),
+                linkTo(methodOn(RequisitoVegetalController.class).findAll()).withRel("todos-os-requisitos-vegetais")
+        );
     }
 
     @PutMapping("/{id}")
