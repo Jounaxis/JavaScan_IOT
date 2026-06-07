@@ -2,10 +2,12 @@ package com.agroscan.agroscan_api.controller;
 
 
 import com.agroscan.agroscan_api.dto.request.UsuarioAppRequest;
+import com.agroscan.agroscan_api.mapper.UsuarioAppMapper;
 import com.agroscan.agroscan_api.model.UsuarioApp;
 import com.agroscan.agroscan_api.service.UsuarioAppService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
+import com.agroscan.agroscan_api.dto.response.UsuarioAppResponse;
 
 import java.util.List;
 
@@ -30,8 +32,11 @@ public class UsuarioAppController {
     }
 
     @GetMapping("/{id}")
-    public UsuarioApp findById(@PathVariable Long id) {
-        return service.findById(id);
+    public UsuarioAppResponse findById(@PathVariable Long id) {
+
+        UsuarioApp usuario = service.findById(id);
+
+        return UsuarioAppMapper.toResponse(usuario);
     }
 
     @PutMapping("/{id}")

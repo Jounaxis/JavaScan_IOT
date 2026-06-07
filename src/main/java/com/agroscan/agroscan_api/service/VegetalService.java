@@ -1,6 +1,7 @@
 package com.agroscan.agroscan_api.service;
 
 import com.agroscan.agroscan_api.dto.request.VegetalRequest;
+import com.agroscan.agroscan_api.exception.ResourceNotFoundException;
 import com.agroscan.agroscan_api.mapper.VegetalMapper;
 import com.agroscan.agroscan_api.model.Vegetal;
 import com.agroscan.agroscan_api.repository.VegetalRepository;
@@ -29,7 +30,7 @@ public class VegetalService {
 
     public Vegetal findById(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Vegetal não encontrado."));
+                .orElseThrow(() -> new ResourceNotFoundException("Vegetal não encontrado."));
     }
 
     public String update(Long id, VegetalRequest request) {

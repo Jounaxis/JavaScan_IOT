@@ -43,4 +43,84 @@ public class SimulacaoCultivo {
     @ManyToOne
     @JoinColumn(name = "ID_CORPO")
     private CorpoCeleste corpoCeleste;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getDataSimulacao() {
+        return dataSimulacao;
+    }
+
+    public void setDataSimulacao(LocalDateTime dataSimulacao) {
+        this.dataSimulacao = dataSimulacao;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Double getScoreViabilidade() {
+        return scoreViabilidade;
+    }
+
+    public void setScoreViabilidade(Double scoreViabilidade) {
+        this.scoreViabilidade = scoreViabilidade;
+    }
+
+    public String getResultado() {
+        return resultado;
+    }
+
+    public void setResultado(String resultado) {
+        this.resultado = resultado;
+    }
+
+    public UsuarioApp getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioApp usuario) {
+        this.usuario = usuario;
+    }
+
+    public Vegetal getVegetal() {
+        return vegetal;
+    }
+
+    public void setVegetal(Vegetal vegetal) {
+        this.vegetal = vegetal;
+    }
+
+    public Solo getSolo() {
+        return solo;
+    }
+
+    public void setSolo(Solo solo) {
+        this.solo = solo;
+    }
+
+    public ClimaAmbiente getClima() {
+        return clima;
+    }
+
+    public void setClima(ClimaAmbiente clima) {
+        this.clima = clima;
+    }
+
+    public CorpoCeleste getCorpoCeleste() {
+        return corpoCeleste;
+    }
+
+    public void setCorpoCeleste(CorpoCeleste corpoCeleste) {
+        this.corpoCeleste = corpoCeleste;
+    }
 }

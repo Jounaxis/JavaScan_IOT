@@ -1,6 +1,7 @@
 package com.agroscan.agroscan_api.service;
 
 import com.agroscan.agroscan_api.dto.request.UsuarioAppRequest;
+import com.agroscan.agroscan_api.exception.ResourceNotFoundException;
 import com.agroscan.agroscan_api.model.UsuarioApp;
 import com.agroscan.agroscan_api.repository.UsuarioAppRepository;
 import com.agroscan.agroscan_api.mapper.UsuarioAppMapper;
@@ -29,7 +30,7 @@ public class UsuarioAppService {
 
     public UsuarioApp findById(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
+                .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado."));
     }
 
     public String update(Long id, UsuarioAppRequest request) {
