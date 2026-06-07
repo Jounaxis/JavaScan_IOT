@@ -5,8 +5,6 @@ import lombok.*;
 
 @Entity
 @Table(name = "TB_REQUISITO_VEGETAL")
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class RequisitoVegetal {
@@ -40,4 +38,76 @@ public class RequisitoVegetal {
     @ManyToOne
     @JoinColumn(name = "ID_VEGETAL")
     private Vegetal vegetal;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Double getTempMin() {
+        return tempMin;
+    }
+
+    public void setTempMin(Double tempMin) {
+        this.tempMin = tempMin;
+    }
+
+    public Double getTempMax() {
+        return tempMax;
+    }
+
+    public void setTempMax(Double tempMax) {
+        this.tempMax = tempMax;
+    }
+
+    public Double getPhSoloMin() {
+        return phSoloMin;
+    }
+
+    public void setPhSoloMin(Double phSoloMin) {
+        this.phSoloMin = phSoloMin;
+    }
+
+    public Double getPhSoloMax() {
+        return phSoloMax;
+    }
+
+    public void setPhSoloMax(Double phSoloMax) {
+        this.phSoloMax = phSoloMax;
+    }
+
+    public Double getQuantidadeAgua() {
+        return quantidadeAgua;
+    }
+
+    public void setQuantidadeAgua(Double quantidadeAgua) {
+        this.quantidadeAgua = quantidadeAgua;
+    }
+
+    public Double getNivelLuzMin() {
+        return nivelLuzMin;
+    }
+
+    public void setNivelLuzMin(Double nivelLuzMin) {
+        this.nivelLuzMin = nivelLuzMin;
+    }
+
+    public String getNotasCultivo() {
+        return notasCultivo;
+    }
+
+    public void setNotasCultivo(String notasCultivo) {
+        this.notasCultivo = notasCultivo;
+    }
+
+    public Vegetal getVegetal() {
+        return vegetal;
+    }
+
+    public void setVegetal(Vegetal vegetal) {
+        this.vegetal = vegetal;
+    }
 }

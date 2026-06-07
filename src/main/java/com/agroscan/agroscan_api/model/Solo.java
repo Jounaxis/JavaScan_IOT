@@ -6,8 +6,6 @@ import lombok.*;
 
 @Entity
 @Table(name = "TB_SOLO")
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Solo {
@@ -23,4 +21,60 @@ public class Solo {
     private Double retencaoAgua;
     private String composicaoPrincipal;
     private String observacoes;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTipoSolo() {
+        return tipoSolo;
+    }
+
+    public void setTipoSolo(String tipoSolo) {
+        this.tipoSolo = tipoSolo;
+    }
+
+    public Double getPhEstimado() {
+        return phEstimado;
+    }
+
+    public void setPhEstimado(Double phEstimado) {
+        this.phEstimado = phEstimado;
+    }
+
+    public String getNivelNutrientes() {
+        return nivelNutrientes;
+    }
+
+    public void setNivelNutrientes(String nivelNutrientes) {
+        this.nivelNutrientes = nivelNutrientes;
+    }
+
+    public Double getRetencaoAgua() {
+        return retencaoAgua;
+    }
+
+    public void setRetencaoAgua(Double retencaoAgua) {
+        this.retencaoAgua = retencaoAgua;
+    }
+
+    public String getComposicaoPrincipal() {
+        return composicaoPrincipal;
+    }
+
+    public void setComposicaoPrincipal(String composicaoPrincipal) {
+        this.composicaoPrincipal = composicaoPrincipal;
+    }
+
+    public String getObservacoes() {
+        return observacoes;
+    }
+
+    public void setObservacoes(String observacoes) {
+        this.observacoes = observacoes;
+    }
 }
