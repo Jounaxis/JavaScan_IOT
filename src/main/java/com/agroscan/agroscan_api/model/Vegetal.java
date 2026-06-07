@@ -7,8 +7,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "TB_VEGETAL")
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Vegetal {
@@ -38,4 +36,68 @@ public class Vegetal {
 
     @OneToMany(mappedBy = "vegetal")
     private List<SimulacaoCultivo> simulacoes;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNomeComum() {
+        return nomeComum;
+    }
+
+    public void setNomeComum(String nomeComum) {
+        this.nomeComum = nomeComum;
+    }
+
+    public String getNomeCientifico() {
+        return nomeCientifico;
+    }
+
+    public void setNomeCientifico(String nomeCientifico) {
+        this.nomeCientifico = nomeCientifico;
+    }
+
+    public String getFamiliaBotanica() {
+        return familiaBotanica;
+    }
+
+    public void setFamiliaBotanica(String familiaBotanica) {
+        this.familiaBotanica = familiaBotanica;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public Integer getCicloCrescimentoDias() {
+        return cicloCrescimentoDias;
+    }
+
+    public void setCicloCrescimentoDias(Integer cicloCrescimentoDias) {
+        this.cicloCrescimentoDias = cicloCrescimentoDias;
+    }
+
+    public List<RequisitoVegetal> getRequisitos() {
+        return requisitos;
+    }
+
+    public void setRequisitos(List<RequisitoVegetal> requisitos) {
+        this.requisitos = requisitos;
+    }
+
+    public List<SimulacaoCultivo> getSimulacoes() {
+        return simulacoes;
+    }
+
+    public void setSimulacoes(List<SimulacaoCultivo> simulacoes) {
+        this.simulacoes = simulacoes;
+    }
 }
