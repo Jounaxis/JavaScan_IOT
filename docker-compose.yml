@@ -1,5 +1,8 @@
 services:
   agrostellar-db:
+    build:
+      context: ./db
+      dockerfile: Dockerfile
     image: jounax/h2-agrostellar:v1
     container_name: agrostellar-db-rm560907
     restart: always
@@ -14,24 +17,42 @@ services:
       - agrostellar-h2-data:/opt/h2-data
     networks:
       - agrostellar-network
+    healthcheck:
+      test: ["CMD-SHELL", "java -cp /opt/h2/h2.jar org.h2.tools.Shell -url jdbc:h2:tcp://localhost:9092/agrostellar -user sa -password '' -sql 'SELECT 1' >/dev/null 2>&1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
 
   agrostellar-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: jounax/agrostellar-api:v1
     container_name: agrostellar-app-rm560907
     restart: always
     depends_on:
-      - agrostellar-db
+      agrostellar-db:
+        condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: agrostellar-api
       SERVER_PORT: 8080
+      SPRING_PROFILES_ACTIVE: docker
+
       SPRING_DATASOURCE_URL: jdbc:h2:tcp://agrostellar-db:9092/agrostellar
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.h2.Driver
       SPRING_DATASOURCE_USERNAME: sa
       SPRING_DATASOURCE_PASSWORD: ""
+
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       SPRING_JPA_SHOW_SQL: "true"
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.H2Dialect
+
       SPRING_H2_CONSOLE_ENABLED: "true"
       SPRING_H2_CONSOLE_PATH: /h2-console
+
+      SPRINGDOC_API_DOCS_ENABLED: "true"
+      SPRINGDOC_SWAGGER_UI_ENABLED: "true"
     ports:
       - "8080:8080"
     networks:
