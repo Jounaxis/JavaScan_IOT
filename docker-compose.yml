@@ -1,9 +1,6 @@
 services:
   agrostellar-db:
-    build:
-      context: ./db
-      dockerfile: Dockerfile
-    image: agrostellar-h2-db:rm560907
+    image: jounax/h2-agrostellar:v1
     container_name: agrostellar-db-rm560907
     restart: always
     environment:
@@ -19,10 +16,7 @@ services:
       - agrostellar-network
 
   agrostellar-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: agrostellar-api:rm560907
+    image: jounax/agrostellar-api:v1
     container_name: agrostellar-app-rm560907
     restart: always
     depends_on:
