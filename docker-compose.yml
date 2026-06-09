@@ -1,6 +1,6 @@
 services:
   agrostellar-db:
-    image: jounax/h2-agrostellar:v4
+    image: jounax/h2-agrostellar:v3
     container_name: agrostellar-db-rm560907
     restart: always
     environment:
