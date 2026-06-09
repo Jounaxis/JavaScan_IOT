@@ -1,6 +1,6 @@
 services:
   agrostellar-db:
-    image: jounax/h2-agrostellar:v3
+    image: jounax/h2-agrostellar:v4
     container_name: agrostellar-db-rm560907
     restart: always
     environment:
@@ -14,13 +14,20 @@ services:
       - agrostellar-h2-data:/opt/h2-data
     networks:
       - agrostellar-network
+    healthcheck:
+      test: ["CMD-SHELL", "java -cp /opt/h2/h2.jar org.h2.tools.Shell -url jdbc:h2:tcp://localhost:9092/./agrostellar -user sa -password '' -sql 'SELECT 1' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
 
   agrostellar-app:
-    image: jounax/agrostellar-api:v3
+    image: jounax/agrostellar-api:v4
     container_name: agrostellar-app-rm560907
     restart: always
     depends_on:
-      - agrostellar-db
+      agrostellar-db:
+        condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: agrostellar-api
       SERVER_PORT: 8080
@@ -34,10 +41,6 @@ services:
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       SPRING_JPA_SHOW_SQL: "true"
       SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.H2Dialect
-
-      SPRING_DATASOURCE_HIKARI_INITIALIZATION_FAIL_TIMEOUT: 120000
-      SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT: 30000
-      SPRING_DATASOURCE_HIKARI_VALIDATION_TIMEOUT: 5000
 
       SPRING_H2_CONSOLE_ENABLED: "true"
       SPRING_H2_CONSOLE_PATH: /h2-console
