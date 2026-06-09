@@ -13,4 +13,4 @@ ADD https://repo1.maven.org/maven2/com/h2database/h2/${H2_VERSION}/h2-${H2_VERSI
 EXPOSE 9092
 EXPOSE 8082
 
-CMD ["sh", "-c", "java -cp /opt/h2/h2.jar org.h2.tools.Server -tcp -tcpAllowOthers -tcpPort ${H2_TCP_PORT} -web -webAllowOthers -webPort ${H2_WEB_PORT} -ifNotExists -baseDir /opt/h2-data"]
+CMD ["sh", "-c", "java -cp /opt/h2/h2.jar org.h2.tools.Server -tcp -tcpAllowOthers -tcpPort ${H2_TCP_PORT} -web -webAllowOthers -webPort ${H2_WEB_PORT} -baseDir /opt/h2-data -ifNotExists"]
