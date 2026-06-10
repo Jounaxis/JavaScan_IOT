@@ -22,7 +22,7 @@ services:
       start_period: 15s
 
   agrostellar-app:
-    image: jounax/agrostellar-api:v4
+    image: jounax/agrostellar-api:v5
     container_name: agrostellar-app-rm560907
     restart: always
     depends_on:
