@@ -34,11 +34,17 @@ public class SecurityConfigurations {
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
                                 "/v3/api-docs/**",
-                                "/h2-console/**"
+                                "/h2-console/**",
+
+                                "/usuarios/**",
+                                "/auth/**",
+
+                                "/solos/**",
+                                "/vegetais/**",
+                                "/corpos-celestes/**",
+                                "/simulacoes/**"
                         ).permitAll()
-                        .requestMatchers(HttpMethod.POST, "/usuarios").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
                 .headers(headers -> headers.frameOptions(frame -> frame.disable()))
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
